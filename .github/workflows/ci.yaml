@@ -11,18 +11,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run tests
+      - name: Install deps
         run: |
           cd backend
           npm install
+
+      - name: Run tests
+        run: |
+          cd backend
           npm test
 
       - name: Build Docker image
         run: |
-          docker build -t username/app:latest .
+          docker build -t yorizova/devops-task-manager:latest .
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
       - name: Push image
-        run: docker push username/app:latest
+        run: docker push yorizova/devops-task-manager:latest
