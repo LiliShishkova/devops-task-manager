@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: backend
-        image: yorizova/final-backend
+        image: yorizova/backend
         ports:
         - containerPort: 3000
