@@ -1,8 +1,9 @@
-provider "aws" {
-  region = "eu-central-1"
+provider "kubernetes" {
+  config_path = "~/.kube/config"
 }
 
-resource "aws_instance" "devops-task-manager" {
-  ami           = "ami-123456"
-  instance_type = "t2.micro"
+resource "kubernetes_namespace" "devops" {
+  metadata {
+    name = "devops"
+  }
 }
