@@ -1,4 +1,4 @@
-FROM node:18
+FROM --platform=linux/arm64 node
 WORKDIR /app
 COPY . .
 RUN npm install
