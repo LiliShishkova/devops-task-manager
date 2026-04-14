@@ -5,4 +5,4 @@ app.get('/', (req, res) => {
   res.send('Hello DevOps Project!');
 });
 
-app.listen(3000, () => console.log('Server running'));
+app.listen(3000, () => console.log('Backend running'));
