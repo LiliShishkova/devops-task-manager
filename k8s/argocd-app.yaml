@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: devops-task-manager
+  namespace: argocd
+spec:
+  destination:
+    namespace: devops
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/LiliShishkova/devops-task-manager
+    targetRevision: main
+    path: k8s
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

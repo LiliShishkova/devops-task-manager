@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: basic-alerts
+  namespace: default
+spec:
+  groups:
+    - name: example
+      rules:
+        - alert: PodDown
+          expr: up == 0
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Pod is down"

@@ -14,6 +14,9 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: yorizova/frontend
+        image: yorizova/frontend:TAG
+        env:
+        - name: REACT_APP_BACKEND_URL
+          value: "http://backend:3000"
         ports:
         - containerPort: 80
