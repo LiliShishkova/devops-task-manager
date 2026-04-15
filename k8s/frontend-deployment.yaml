@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: yorizova/frontend:TAG
+        image: yorizova/frontend:latest
         env:
         - name: REACT_APP_BACKEND_URL
           value: "http://backend:3000"
