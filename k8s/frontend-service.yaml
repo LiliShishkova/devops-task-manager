@@ -2,11 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
+  namespace: devops
+  labels:
+    app: frontend
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: frontend
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 80
-      nodePort: 30080
+

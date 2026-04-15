@@ -1,8 +1,8 @@
-const express = require('express');
-const app = express();
+const { createApp } = require('./app');
 
-app.get('/', (req, res) => {
-  res.send('Hello DevOps Project!');
+const port = process.env.PORT || 3000;
+const app = createApp();
+
+app.listen(port, () => {
+  console.log(`Backend running on port ${port}`);
 });
-
-app.listen(3000, () => console.log('Backend running'));

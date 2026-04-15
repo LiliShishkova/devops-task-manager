@@ -1,0 +1,35 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: devops-task-manager-alerts
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: devops-task-manager.rules
+      rules:
+        - alert: DevOpsTaskManagerBackendDown
+          expr: up{job="backend"} == 0
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: Backend is unavailable
+            description: The backend metrics endpoint has not been scraped successfully for at least 2 minutes.
+        - alert: DevOpsTaskManagerHighLatency
+          expr: devops_task_manager_request_duration_average_ms > 500
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: Backend latency is elevated
+            description: Average request duration has stayed above 500ms for 5 minutes.
+        - alert: DevOpsTaskManagerNoTasksLoaded
+          expr: devops_task_manager_tasks_total < 1
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: Backend is serving an empty task board
+            description: The application currently reports zero tasks, which may indicate a data reset.

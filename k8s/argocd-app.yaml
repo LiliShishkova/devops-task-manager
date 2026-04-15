@@ -4,15 +4,17 @@ metadata:
   name: devops-task-manager
   namespace: argocd
 spec:
-  destination:
-    namespace: devops
-    server: https://kubernetes.default.svc
+  project: default
   source:
-    repoURL: https://github.com/LiliShishkova/devops-task-manager
+    repoURL: https://github.com/LiliShishkova/devops-task-manager.git
     targetRevision: main
     path: k8s
-  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: devops
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
