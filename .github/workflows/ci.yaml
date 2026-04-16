@@ -69,13 +69,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v4
-        with:
-          version: v1.30.0
-
-      - name: Validate Kubernetes manifests
-        run: kubectl apply --dry-run=client --validate=false -f k8s
+      - name: Validate Kubernetes manifest structure
+        run: |
+          ruby -e 'require "yaml";
+          Dir["k8s/**/*.yaml"].sort.each do |path|
+            docs = YAML.load_stream(File.read(path))
+            docs.each_with_index do |doc, index|
+              next if doc.nil?
+              raise "#{path} document #{index + 1} is not a mapping" unless doc.is_a?(Hash)
+              %w[apiVersion kind metadata].each do |key|
+                raise "#{path} document #{index + 1} missing #{key}" unless doc.key?(key)
+              end
+              metadata = doc["metadata"]
+              raise "#{path} document #{index + 1} metadata is not a mapping" unless metadata.is_a?(Hash)
+              raise "#{path} document #{index + 1} missing metadata.name" unless metadata.key?("name")
+            end
+          end
+          puts "Kubernetes manifests parsed successfully."'
 
   docker-build:
     runs-on: ubuntu-latest
