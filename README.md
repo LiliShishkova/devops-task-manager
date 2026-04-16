@@ -26,6 +26,20 @@ DevOps Task Manager is now a real full-stack starter instead of a placeholder re
 
 ## Local run
 
+## One-time setup
+
+Install the git hook once in this repo so commits actually run the configured checks:
+
+```bash
+pre-commit install
+```
+
+You can test the hook manually on the files you changed with:
+
+```bash
+pre-commit run --files path/to/file1 path/to/file2
+```
+
 ### Option 1: run each app separately
 
 Backend:

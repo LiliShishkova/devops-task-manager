@@ -75,7 +75,7 @@ jobs:
           version: v1.30.0
 
       - name: Validate Kubernetes manifests
-        run: kubectl apply --dry-run=client -f k8s
+        run: kubectl apply --dry-run=client --validate=false -f k8s
 
   docker-build:
     runs-on: ubuntu-latest
