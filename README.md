@@ -115,9 +115,8 @@ The `k8s/` folder includes:
 
 Before applying these manifests, make sure your cluster has:
 
-- an ingress controller
 - Argo CD installed
-- Prometheus Operator CRDs available
+- Prometheus available
 - access to the Docker images referenced in the manifests
 
 ## What you should check manually
