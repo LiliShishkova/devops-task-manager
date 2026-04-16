@@ -1,7 +1,5 @@
 # DevOps Task Manager
 
-DevOps Task Manager is now a real full-stack starter instead of a placeholder repo:
-
 - `backend/` exposes a task API with CRUD endpoints, `/health`, and `/metrics`
 - `frontend/devops-task-manager/` renders a task dashboard and talks to the backend
 - `docker-compose.yml` runs the connected app locally
@@ -135,6 +133,4 @@ Before applying these manifests, make sure your cluster has:
 
 ## Notes
 
-- I did not push or commit anything.
-- `backend/node_modules/` is already tracked in this repository from before; I left it alone.
 - The Alertmanager secret manifest uses `${DISCORD_WEBHOOK_URL}` as a placeholder. Replace it with your secret management approach before applying in a real cluster.
